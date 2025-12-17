@@ -2,7 +2,6 @@ import { Modal, Table, Button } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { HiOutlineExclamationCircle } from 'react-icons/hi';
-import { FaCheck, FaTimes } from 'react-icons/fa';
 
 export default function DashComments() {
   const { currentUser } = useSelector((state) => state.user);
@@ -10,6 +9,7 @@ export default function DashComments() {
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [commentIdToDelete, setCommentIdToDelete] = useState('');
+
   useEffect(() => {
     const fetchComments = async () => {
       try {
@@ -17,17 +17,13 @@ export default function DashComments() {
         const data = await res.json();
         if (res.ok) {
           setComments(data.comments);
-          if (data.comments.length < 9) {
-            setShowMore(false);
-          }
+          if (data.comments.length < 9) setShowMore(false);
         }
       } catch (error) {
         console.log(error.message);
       }
     };
-    if (currentUser.isAdmin) {
-      fetchComments();
-    }
+    if (currentUser.isAdmin) fetchComments();
   }, [currentUser._id]);
 
   const handleShowMore = async () => {
@@ -39,9 +35,7 @@ export default function DashComments() {
       const data = await res.json();
       if (res.ok) {
         setComments((prev) => [...prev, ...data.comments]);
-        if (data.comments.length < 9) {
-          setShowMore(false);
-        }
+        if (data.comments.length < 9) setShowMore(false);
       }
     } catch (error) {
       console.log(error.message);
@@ -49,22 +43,16 @@ export default function DashComments() {
   };
 
   const handleDeleteComment = async () => {
-    setShowModal(false);
     try {
       const res = await fetch(
         `/api/comment/deleteComment/${commentIdToDelete}`,
-        {
-          method: 'DELETE',
-        }
+        { method: 'DELETE' }
       );
-      const data = await res.json();
       if (res.ok) {
         setComments((prev) =>
           prev.filter((comment) => comment._id !== commentIdToDelete)
         );
         setShowModal(false);
-      } else {
-        console.log(data.message);
       }
     } catch (error) {
       console.log(error.message);
@@ -72,74 +60,109 @@ export default function DashComments() {
   };
 
   return (
-    <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
+    <div className='font-mono bg-black text-green-400 border border-green-700 rounded-md p-4 overflow-x-auto md:mt-20'>
+      <h2 className='text-lg mb-4 text-green-500'>
+        $ tail -f /var/log/comments.log
+      </h2>
+
       {currentUser.isAdmin && comments.length > 0 ? (
         <>
-          <Table hoverable className='shadow-md'>
-            <Table.Head>
-              <Table.HeadCell>Date updated</Table.HeadCell>
-              <Table.HeadCell>Comment content</Table.HeadCell>
-              <Table.HeadCell>Number of likes</Table.HeadCell>
-              <Table.HeadCell>PostId</Table.HeadCell>
-              <Table.HeadCell>UserId</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
+          <Table className='bg-black text-green-400'>
+            <Table.Head className='bg-black border-b border-green-700'>
+              <Table.HeadCell className='text-green-500'>
+                UPDATED
+              </Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>
+                CONTENT
+              </Table.HeadCell>
+              <Table.HeadCell className='text-cyan-400'>
+                LIKES
+              </Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>
+                POST_ID
+              </Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>
+                USER_ID
+              </Table.HeadCell>
+              <Table.HeadCell className='text-red-400'>
+                RM
+              </Table.HeadCell>
             </Table.Head>
-            {comments.map((comment) => (
-              <Table.Body className='divide-y' key={comment._id}>
-                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+
+            <Table.Body className='divide-y divide-green-900'>
+              {comments.map((comment) => (
+                <Table.Row
+                  key={comment._id}
+                  className='bg-black hover:bg-green-950 transition'
+                >
                   <Table.Cell>
                     {new Date(comment.updatedAt).toLocaleDateString()}
                   </Table.Cell>
-                  <Table.Cell>{comment.content}</Table.Cell>
-                  <Table.Cell>{comment.numberOfLikes}</Table.Cell>
-                  <Table.Cell>{comment.postId}</Table.Cell>
-                  <Table.Cell>{comment.userId}</Table.Cell>
+
+                  <Table.Cell className='max-w-md truncate text-green-300'>
+                    {comment.content}
+                  </Table.Cell>
+
+                  <Table.Cell className='text-cyan-400'>
+                    {comment.numberOfLikes}
+                  </Table.Cell>
+
+                  <Table.Cell className='text-green-500 text-xs'>
+                    {comment.postId}
+                  </Table.Cell>
+
+                  <Table.Cell className='text-green-500 text-xs'>
+                    {comment.userId}
+                  </Table.Cell>
+
                   <Table.Cell>
                     <span
                       onClick={() => {
                         setShowModal(true);
                         setCommentIdToDelete(comment._id);
                       }}
-                      className='font-medium text-red-500 hover:underline cursor-pointer'
+                      className='cursor-pointer text-red-500 hover:text-red-400'
                     >
-                      Delete
+                      rm
                     </span>
                   </Table.Cell>
                 </Table.Row>
-              </Table.Body>
-            ))}
+              ))}
+            </Table.Body>
           </Table>
+
           {showMore && (
             <button
               onClick={handleShowMore}
-              className='w-full text-teal-500 self-center text-sm py-7'
+              className='mt-4 text-green-500 hover:text-green-300'
             >
-              Show more
+              $ show --more
             </button>
           )}
         </>
       ) : (
-        <p>You have no comments yet!</p>
+        <p className='text-green-600'>$ no comments found</p>
       )}
+
+      {/* DELETE MODAL */}
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
         size='md'
       >
-        <Modal.Header />
-        <Modal.Body>
-          <div className='text-center'>
-            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete this comment?
+        <Modal.Body className='bg-black border border-green-700 rounded-md'>
+          <div className='text-center font-mono'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-red-500 mx-auto mb-4' />
+            <h3 className='mb-5 text-green-400'>
+              $ rm comment --force ?
             </h3>
             <div className='flex justify-center gap-4'>
               <Button color='failure' onClick={handleDeleteComment}>
-                Yes, I'm sure
+                yes
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
-                No, cancel
+                cancel
               </Button>
             </div>
           </div>

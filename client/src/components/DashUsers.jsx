@@ -10,6 +10,7 @@ export default function DashUsers() {
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [userIdToDelete, setUserIdToDelete] = useState('');
+
   useEffect(() => {
     const fetchUsers = async () => {
       try {
@@ -17,17 +18,13 @@ export default function DashUsers() {
         const data = await res.json();
         if (res.ok) {
           setUsers(data.users);
-          if (data.users.length < 9) {
-            setShowMore(false);
-          }
+          if (data.users.length < 9) setShowMore(false);
         }
       } catch (error) {
         console.log(error.message);
       }
     };
-    if (currentUser.isAdmin) {
-      fetchUsers();
-    }
+    if (currentUser.isAdmin) fetchUsers();
   }, [currentUser._id]);
 
   const handleShowMore = async () => {
@@ -37,9 +34,7 @@ export default function DashUsers() {
       const data = await res.json();
       if (res.ok) {
         setUsers((prev) => [...prev, ...data.users]);
-        if (data.users.length < 9) {
-          setShowMore(false);
-        }
+        if (data.users.length < 9) setShowMore(false);
       }
     } catch (error) {
       console.log(error.message);
@@ -48,49 +43,64 @@ export default function DashUsers() {
 
   const handleDeleteUser = async () => {
     try {
-        const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
-            method: 'DELETE',
-        });
-        const data = await res.json();
-        if (res.ok) {
-            setUsers((prev) => prev.filter((user) => user._id !== userIdToDelete));
-            setShowModal(false);
-        } else {
-            console.log(data.message);
-        }
+      const res = await fetch(`/api/user/delete/${userIdToDelete}`, {
+        method: 'DELETE',
+      });
+      if (res.ok) {
+        setUsers((prev) =>
+          prev.filter((user) => user._id !== userIdToDelete)
+        );
+        setShowModal(false);
+      }
     } catch (error) {
-        console.log(error.message);
+      console.log(error.message);
     }
   };
 
   return (
-    <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
+    <div className='font-mono bg-black text-green-400 border border-green-700 rounded-md p-4 overflow-x-auto mt-20'>
+      <h2 className='text-lg mb-4 text-green-500'>
+        $ cat /etc/users
+      </h2>
+
       {currentUser.isAdmin && users.length > 0 ? (
         <>
-          <Table hoverable className='shadow-md'>
-            <Table.Head>
-              <Table.HeadCell>Date created</Table.HeadCell>
-              <Table.HeadCell>User image</Table.HeadCell>
-              <Table.HeadCell>Username</Table.HeadCell>
-              <Table.HeadCell>Email</Table.HeadCell>
-              <Table.HeadCell>Admin</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
+          <Table className='bg-black text-green-400'>
+            <Table.Head className='bg-black border-b border-green-700'>
+              <Table.HeadCell className='text-green-500'>CREATED</Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>AVATAR</Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>USERNAME</Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>EMAIL</Table.HeadCell>
+              <Table.HeadCell className='text-cyan-400'>ADMIN</Table.HeadCell>
+              <Table.HeadCell className='text-red-400'>DEL</Table.HeadCell>
             </Table.Head>
-            {users.map((user) => (
-              <Table.Body className='divide-y' key={user._id}>
-                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+
+            <Table.Body className='divide-y divide-green-900'>
+              {users.map((user) => (
+                <Table.Row
+                  key={user._id}
+                  className='bg-black hover:bg-green-950 transition'
+                >
                   <Table.Cell>
                     {new Date(user.createdAt).toLocaleDateString()}
                   </Table.Cell>
+
                   <Table.Cell>
                     <img
                       src={user.profilePicture}
                       alt={user.username}
-                      className='w-10 h-10 object-cover bg-gray-500 rounded-full'
+                      className='w-10 h-10 object-cover border border-green-700'
                     />
                   </Table.Cell>
-                  <Table.Cell>{user.username}</Table.Cell>
-                  <Table.Cell>{user.email}</Table.Cell>
+
+                  <Table.Cell className='text-green-300'>
+                    {user.username}
+                  </Table.Cell>
+
+                  <Table.Cell className='text-green-400'>
+                    {user.email}
+                  </Table.Cell>
+
                   <Table.Cell>
                     {user.isAdmin ? (
                       <FaCheck className='text-green-500' />
@@ -98,52 +108,55 @@ export default function DashUsers() {
                       <FaTimes className='text-red-500' />
                     )}
                   </Table.Cell>
+
                   <Table.Cell>
                     <span
                       onClick={() => {
                         setShowModal(true);
                         setUserIdToDelete(user._id);
                       }}
-                      className='font-medium text-red-500 hover:underline cursor-pointer'
+                      className='cursor-pointer text-red-500 hover:text-red-400'
                     >
-                      Delete
+                      rm
                     </span>
                   </Table.Cell>
                 </Table.Row>
-              </Table.Body>
-            ))}
+              ))}
+            </Table.Body>
           </Table>
+
           {showMore && (
             <button
               onClick={handleShowMore}
-              className='w-full text-teal-500 self-center text-sm py-7'
+              className='mt-4 text-green-500 hover:text-green-300'
             >
-              Show more
+              $ show --more
             </button>
           )}
         </>
       ) : (
-        <p>You have no users yet!</p>
+        <p className='text-green-600'>$ no users found</p>
       )}
+
+      {/* DELETE MODAL */}
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
         size='md'
       >
-        <Modal.Header />
-        <Modal.Body>
-          <div className='text-center'>
-            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete this user?
+        <Modal.Body className='bg-black border border-green-700 rounded-md'>
+          <div className='text-center font-mono'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-red-500 mx-auto mb-4' />
+            <h3 className='mb-5 text-green-400'>
+              $ rm user --force ?
             </h3>
             <div className='flex justify-center gap-4'>
               <Button color='failure' onClick={handleDeleteUser}>
-                Yes, I'm sure
+                yes
               </Button>
               <Button color='gray' onClick={() => setShowModal(false)}>
-                No, cancel
+                cancel
               </Button>
             </div>
           </div>

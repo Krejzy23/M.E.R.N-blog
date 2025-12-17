@@ -10,6 +10,7 @@ export default function DashPosts() {
   const [showMore, setShowMore] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [postIdToDelete, setPostIdToDelete] = useState('');
+
   useEffect(() => {
     const fetchPosts = async () => {
       try {
@@ -17,17 +18,13 @@ export default function DashPosts() {
         const data = await res.json();
         if (res.ok) {
           setUserPosts(data.posts);
-          if (data.posts.length < 9) {
-            setShowMore(false);
-          }
+          if (data.posts.length < 9) setShowMore(false);
         }
       } catch (error) {
         console.log(error.message);
       }
     };
-    if (currentUser.isAdmin) {
-      fetchPosts();
-    }
+    if (currentUser.isAdmin) fetchPosts();
   }, [currentUser._id]);
 
   const handleShowMore = async () => {
@@ -39,9 +36,7 @@ export default function DashPosts() {
       const data = await res.json();
       if (res.ok) {
         setUserPosts((prev) => [...prev, ...data.posts]);
-        if (data.posts.length < 9) {
-          setShowMore(false);
-        }
+        if (data.posts.length < 9) setShowMore(false);
       }
     } catch (error) {
       console.log(error.message);
@@ -53,14 +48,9 @@ export default function DashPosts() {
     try {
       const res = await fetch(
         `/api/post/deletepost/${postIdToDelete}/${currentUser._id}`,
-        {
-          method: 'DELETE',
-        }
+        { method: 'DELETE' }
       );
-      const data = await res.json();
-      if (!res.ok) {
-        console.log(data.message);
-      } else {
+      if (res.ok) {
         setUserPosts((prev) =>
           prev.filter((post) => post._id !== postIdToDelete)
         );
@@ -71,98 +61,119 @@ export default function DashPosts() {
   };
 
   return (
-    <div className='table-auto overflow-x-scroll md:mx-auto p-3 scrollbar scrollbar-track-slate-100 scrollbar-thumb-slate-300 dark:scrollbar-track-slate-700 dark:scrollbar-thumb-slate-500'>
+    <div className='font-mono bg-black text-green-400 border border-green-700 rounded-md p-4 overflow-x-auto md:mt-20'>
+      <h2 className='text-lg mb-4 text-green-500'>
+        $ ls ./posts
+      </h2>
+
       {currentUser.isAdmin && userPosts.length > 0 ? (
         <>
-          <Table hoverable className='shadow-md'>
-            <Table.Head>
-              <Table.HeadCell>Date updated</Table.HeadCell>
-              <Table.HeadCell>Post image</Table.HeadCell>
-              <Table.HeadCell>Post title</Table.HeadCell>
-              <Table.HeadCell>Category</Table.HeadCell>
-              <Table.HeadCell>Delete</Table.HeadCell>
-              <Table.HeadCell>
-                <span>Edit</span>
-              </Table.HeadCell>
+          <Table className='bg-black text-green-400'>
+            <Table.Head className='bg-black border-b border-green-700'>
+              <Table.HeadCell className='text-green-500'>UPDATED</Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>IMAGE</Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>TITLE</Table.HeadCell>
+              <Table.HeadCell className='text-green-500'>CATEGORY</Table.HeadCell>
+              <Table.HeadCell className='text-red-400'>DEL</Table.HeadCell>
+              <Table.HeadCell className='text-cyan-400'>EDIT</Table.HeadCell>
             </Table.Head>
-            {userPosts.map((post) => (
-              <Table.Body key={post._id} className='divide-y'>
-                <Table.Row className='bg-white dark:border-gray-700 dark:bg-gray-800'>
+
+            <Table.Body className='divide-y divide-green-900'>
+              {userPosts.map((post) => (
+                <Table.Row
+                  key={post._id}
+                  className='bg-black hover:bg-green-950 transition'
+                >
                   <Table.Cell>
                     {new Date(post.updatedAt).toLocaleDateString()}
                   </Table.Cell>
+
                   <Table.Cell>
                     <Link to={`/post/${post.slug}`}>
                       <img
                         src={post.image}
                         alt={post.title}
-                        className='w-20 h-10 object-cover bg-gray-500'
+                        className='w-24 h-12 object-cover border border-green-700'
                       />
                     </Link>
                   </Table.Cell>
+
                   <Table.Cell>
                     <Link
-                      className='font-medium text-gray-900 dark:text-white'
                       to={`/post/${post.slug}`}
+                      className='hover:text-green-300'
                     >
                       {post.title}
                     </Link>
                   </Table.Cell>
-                  <Table.Cell>{post.category}</Table.Cell>
+
+                  <Table.Cell className='uppercase text-green-300'>
+                    {post.category}
+                  </Table.Cell>
+
                   <Table.Cell>
                     <span
                       onClick={() => {
                         setShowModal(true);
                         setPostIdToDelete(post._id);
                       }}
-                      className='font-medium text-red-500 hover:underline cursor-pointer'
+                      className='cursor-pointer text-red-500 hover:text-red-400'
                     >
-                      Delete
+                      rm
                     </span>
                   </Table.Cell>
+
                   <Table.Cell>
                     <Link
-                      className='text-teal-500 hover:underline'
                       to={`/update-post/${post._id}`}
+                      className='text-cyan-400 hover:text-cyan-300'
                     >
-                      <span>Edit</span>
+                      nano
                     </Link>
                   </Table.Cell>
                 </Table.Row>
-              </Table.Body>
-            ))}
+              ))}
+            </Table.Body>
           </Table>
+
           {showMore && (
             <button
               onClick={handleShowMore}
-              className='w-full text-teal-500 self-center text-sm py-7'
+              className='mt-4 text-green-500 hover:text-green-300'
             >
-              Show more
+              $ show --more
             </button>
           )}
         </>
       ) : (
-        <p>You have no posts yet!</p>
+        <p className='text-green-600'>$ no posts found</p>
       )}
+
+      {/* DELETE MODAL */}
       <Modal
         show={showModal}
         onClose={() => setShowModal(false)}
         popup
         size='md'
       >
-        <Modal.Header />
-        <Modal.Body>
-          <div className='text-center'>
-            <HiOutlineExclamationCircle className='h-14 w-14 text-gray-400 dark:text-gray-200 mb-4 mx-auto' />
-            <h3 className='mb-5 text-lg text-gray-500 dark:text-gray-400'>
-              Are you sure you want to delete this post?
+        <Modal.Body className='bg-black border border-green-700 rounded-md'>
+          <div className='text-center font-mono'>
+            <HiOutlineExclamationCircle className='h-14 w-14 text-red-500 mx-auto mb-4' />
+            <h3 className='mb-5 text-green-400'>
+              $ rm post --force ?
             </h3>
             <div className='flex justify-center gap-4'>
-              <Button color='failure' onClick={handleDeletePost}>
-                Yes, I'm sure
+              <Button
+                color='failure'
+                onClick={handleDeletePost}
+              >
+                yes
               </Button>
-              <Button color='gray' onClick={() => setShowModal(false)}>
-                No, cancel
+              <Button
+                color='gray'
+                onClick={() => setShowModal(false)}
+              >
+                cancel
               </Button>
             </div>
           </div>
