@@ -5,6 +5,7 @@ import CallToAction from "../components/CallToAction";
 import CommentSection from "../components/CommentSection";
 import PostCard from "../components/PostCard";
 import PostTerminalHeader from "../components/PostTerminalHeader";
+import Section from "../components/Section";
 
 export default function PostPage() {
   const { postSlug } = useParams();
@@ -61,13 +62,13 @@ export default function PostPage() {
     );
 
   return (
-    <main className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">
+    <Section className="p-3 flex flex-col max-w-6xl mx-auto min-h-screen">
       <PostTerminalHeader post={post} />
       <img
         src={post.image}
         alt={post.title}
         className="mt-8
-        max-w-4xl mx-auto
+        max-w-3xl mx-auto
         w-full
         max-h-[500px]
         object-cover
@@ -90,6 +91,6 @@ export default function PostPage() {
             recentPosts.map((post) => <PostCard key={post._id} post={post} />)}
         </div>
       </div>
-    </main>
+    </Section>
   );
 }

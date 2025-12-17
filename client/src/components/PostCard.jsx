@@ -19,33 +19,44 @@ export default function PostCard({ post }) {
           transition
         "
       >
-        {/*SCAN LINES */}
+        {/* SCAN LINES */}
         <div className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition">
           <div className="scan-line" />
         </div>
+
         {/* IMAGE AS NOISE */}
         <div className="absolute inset-0 opacity-10">
           <img src={post.image} alt="" className="w-full h-full object-cover" />
         </div>
 
-        {/* CONTENT */}
         <div className="relative z-10 flex flex-col gap-3">
-          {/* TIMESTAMP */}
-          <span className="text-cyan-500 text-xs">
-            [{new Date(post.createdAt).toLocaleString()}]
-          </span>
+          {/* TYPE / MODULE */}
+          <div className="flex flex-col md:flex-row justify-between">
+            <div
+              className="inline-flex w-fit items-center gap-2 border px-2 py-[2px] text-xs"
+              style={{
+                borderColor: categoryColor,
+                color: categoryColor,
+              }}
+            >
+              <span className="opacity-70">module:</span>
+              <span className="uppercase tracking-wide">{post.category}</span>
+            </div>
+            {/* TIMESTAMP */}
+            <span className="text-cyan-500 mt-2 text-xs">
+              [{new Date(post.createdAt).toLocaleString()}]
+            </span>
+          </div>
 
           {/* TITLE */}
           <h3 className="text-green-400 text-lg tracking-wide uppercase">
             {post.title}
           </h3>
 
-          {/* META */}
-          <div className="flex gap-4 text-xs">
-            <span style={{ color: categoryColor }}>
-              module: {post.category}
-            </span>
-            <span className="text-green-500">status: logged</span>
+          {/* STATUS */}
+          <div className="flex gap-4 text-xs text-green-500">
+            <span>status: logged</span>
+            <span>integrity: ok</span>
           </div>
 
           {/* ACTION */}

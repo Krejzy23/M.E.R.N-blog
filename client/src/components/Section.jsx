@@ -18,14 +18,14 @@ const Section = ({
 
       {showVerticalLines && (
         <>
-          <div className="hidden absolute top-0 left-5 w-[0.0625rem] h-full bg-stroke-1 pointer-events-none lg:block lg:left-[1.875rem] xl:left-10" />
-          <div className="hidden absolute top-0 right-5 w-[0.0625rem] h-full bg-stroke-1 pointer-events-none lg:block lg:right-[1.875rem] xl:right-10" />
+          <div className="hidden absolute top-0 left-5 w-[0.0625rem] h-full bg-stroke-soft pointer-events-none lg:block lg:left-[1.875rem] xl:left-10" />
+          <div className="hidden absolute top-0 right-5 w-[0.0625rem] h-full bg-stroke-soft pointer-events-none lg:block lg:right-[1.875rem] xl:right-10" />
         </>
       )}
       {crosses && (
         <>
           <div
-            className={`hidden absolute top-0 left-[1.875rem] h-[0.0625rem] bg-stroke-1 pointer-events-none lg:block xl:left-10 right-10 ${crossesOffset}`}
+            className={`hidden absolute top-0 left-[1.875rem] h-[0.0625rem] bg-stroke-soft pointer-events-none lg:block xl:left-10 right-10 ${crossesOffset}`}
           />
           <SectionSvg crossesOffset={crossesOffset} />
         </>

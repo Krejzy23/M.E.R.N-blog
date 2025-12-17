@@ -1,24 +1,38 @@
-import { Button } from 'flowbite-react';
+import { Link } from "react-router-dom";
 
 export default function CallToAction() {
   return (
-    <div className='flex max-w-[60rem] flex-col sm:flex-row p-3 border-4 border-stroke-1 justify-center items-center rounded-tl-3xl rounded-br-3xl text-center bg-stroke-1'>
-        <div className="justify-center flex flex-col">
-            <h2 className='text-xl font-serif font-semibold text-white'>
-                Are you interested about C👀peration?
-            </h2>
-            <p className='my-2 font-serif text-white'>
-                Checkout my Portfolio and Contact me!
-            </p>
-            <Button gradientDuoTone='purpleToBlue' className='rounded-tl-xl rounded-bl-none'>
-                <a href="https://www.100jsprojects.com" target='_blank' rel='noopener noreferrer'>
-                    Ak WebDev
-                </a>
-            </Button>
-        </div>
-        <div className="p-7 flex-1">
-            <img src="https://bairesdev.mo.cloudinary.net/blog/2023/08/What-Is-JavaScript-Used-For.jpg" />
-        </div>
+    <div className="max-w-4xl mx-auto mt-16 border border-cyan-500/30 bg-black/80 p-6 font-mono text-green-400">
+      <p className="text-cyan-400 text-xs mb-2">
+        ak@blog:~$ cat /author/info
+      </p>
+
+      <div className="space-y-1 text-sm">
+        <p>AUTHOR: <span className="text-green-300">ales krejzl</span></p>
+        <p>ROLE: <span className="text-green-300">Full-Stack Developer</span></p>
+        <p>
+          STATUS:{" "}
+          <span className="text-green-400 animate-pulse">
+            AVAILABLE_FOR_COOPERATION
+          </span>
+        </p>
+      </div>
+
+      <div className="mt-4 flex gap-4 text-xs">
+        <a
+          href="https://mac-os-port-three.vercel.app/"
+          className="border border-cyan-500/30 px-3 py-1 text-cyan-400 hover:bg-cyan-500/10 transition"
+        >
+          open portfolio
+        </a>
+
+        <a
+          href="mailto:ales.krejzl@gmail.com"
+          className="border border-green-500/30 px-3 py-1 text-green-400 hover:bg-green-500/10 transition"
+        >
+          contact
+        </a>
+      </div>
     </div>
-  )
+  );
 }

@@ -18,7 +18,7 @@ export default function Hero() {
     <div className="relative min-h-[90vh] flex items-center justify-center bg-[#0b0f19] overflow-hidden">
       
       {/* background grid */}
-      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(34,211,238,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      <div className="absolute inset-0 opacity-10 text-transparent bg-[linear-gradient(rgba(34,211,238,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       <div className="relative z-10 max-w-3xl px-6 text-center font-mono text-cyan-400">
         

@@ -112,7 +112,14 @@ export default function Search() {
               value={sidebarData.searchTerm}
               onChange={handleChange}
               placeholder="type keyword"
-              className="bg-black text-green-400 border-cyan-500/30"
+              className=" text-green-400 border-cyan-500/30"
+              style={{
+                background: "#0b0f19",
+                color: "#22c55e",        // text
+                border: "1px solid #00ffff", // barva a tloušťka borderu
+                borderRadius: "0px",     // hranaté rohy
+                padding: "0.5 rem 0.5rem", // vnitřní odsazení
+              }}
             />
           </div>
 
@@ -123,6 +130,13 @@ export default function Search() {
               value={sidebarData.sort}
               onChange={handleChange}
               className="bg-black text-green-400 border-cyan-500/30"
+              style={{
+                background: "#0b0f19",
+                color: "#22c55e",        // text
+                border: "1px solid #00ffff", // barva a tloušťka borderu
+                borderRadius: "0px",     // hranaté rohy
+                padding: "0.5 rem 0.5rem", // vnitřní odsazení
+              }}
             >
               <option value="desc">latest</option>
               <option value="asc">oldest</option>
@@ -137,7 +151,13 @@ export default function Search() {
               id="category"
               value={sidebarData.category}
               onChange={handleChange}
-              className="bg-black text-green-400 border-cyan-500/30"
+              style={{
+                background: "#0b0f19",
+                color: "#22c55e",        // text
+                border: "1px solid #00ffff", // barva a tloušťka borderu
+                borderRadius: "0px",     // hranaté rohy
+                padding: "0.5 rem 0.5rem", // vnitřní odsazení
+              }}
             >
               <option value="uncategorized">any</option>
               <option value="Coding">Coding</option>

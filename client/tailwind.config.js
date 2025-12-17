@@ -10,7 +10,8 @@ export default {
       colors: {
         stroke: {
           1: '#20C20E',
-          2: '#39FF14'
+          2: '#39FF14',
+          soft: 'rgba(32, 194, 14, 0.25)'
         },
         n:{
           3: "#ADA8C3",

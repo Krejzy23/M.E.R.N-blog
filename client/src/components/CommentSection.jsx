@@ -142,11 +142,18 @@ export default function CommentSection({ postId }) {
         >
           <Textarea
             placeholder="> write_message --max 200"
-            rows="3"
+            rows="5"
             maxLength="200"
             className="bg-black/80 text-green-400 font-mono border border-cyan-500/30 focus:ring-0 focus:border-green-400"
             onChange={(e) => setComment(e.target.value)}
             value={comment}
+            style={{
+              background: "#0b0f19",
+              color: "#22c55e",        // text
+              border: "1px solid #00ffff", // barva a tloušťka borderu
+              borderRadius: "0px",     // hranaté rohy
+              padding: "0.5 rem 0.5rem", // vnitřní odsazení
+            }}
           />
           <div className="flex justify-between items-center mt-5">
             <p className="font-mono text-cyan-400/60 text-xs">
@@ -161,25 +168,25 @@ export default function CommentSection({ postId }) {
           </div>
           {commentError && (
             <p className="mt-4 font-mono text-red-400 text-sm">
-  ERROR :: {commentError}
-</p>
+              ERROR :: {commentError}
+            </p>
           )}
         </form>
       )}
       {comments.length === 0 ? (
         <p className="mt-6 font-mono text-cyan-400/60">
-  &gt; no_log_entries_found
-</p>
+          &gt; no_log_entries_found
+        </p>
       ) : (
         <>
-<div className="mt-8 border-l border-cyan-500/30 pl-4 mb-4">
-  <h3 className="font-mono text-green-400 text-lg">
-    #user_input{" "}
-    <span className="text-cyan-400/70 text-sm">
-      ({comments.length})
-    </span>
-  </h3>
-</div>
+          <div className="mt-8 border-l border-cyan-500/30 pl-4 mb-4">
+            <h3 className="font-mono text-green-400 text-lg">
+              #user_input{" "}
+              <span className="text-cyan-400/70 text-sm">
+                ({comments.length})
+              </span>
+            </h3>
+          </div>
           {comments.map((comment) => (
             <Comment
               key={comment._id}
@@ -201,31 +208,30 @@ export default function CommentSection({ postId }) {
         size="md"
       >
         <div className="bg-black border border-cyan-400/70">
-        <Modal.Header/>
-        <Modal.Body>
-          <div className="text-center">
-            <HiOutlineExclamationCircle className="h-14 w-14 text-red-400 dark:text-gray-200 mb-4 mx-auto" />
-            <h3 className="mb-5 text-lg font-mono text-red-400">
-              SYSTEM WARNING
-            </h3>
-            <p className="text-sm text-cyan-400/70 pb-5">
-              This action will permanently remove the log entry.
-            </p>
+          <Modal.Header />
+          <Modal.Body>
+            <div className="text-center">
+              <HiOutlineExclamationCircle className="h-14 w-14 text-red-400 dark:text-gray-200 mb-4 mx-auto" />
+              <h3 className="mb-5 text-lg font-mono text-red-400">
+                SYSTEM WARNING
+              </h3>
+              <p className="text-sm text-cyan-400/70 pb-5">
+                This action will permanently remove the log entry.
+              </p>
 
-            <div className="flex justify-center gap-4">
-              <Button
-                color="failure"
-                onClick={() => handleDelete(commentToDelete)}
-              >
-               DELETE
-              </Button>
-              <Button color="gray" onClick={() => setShowModal(false)}>
-                ABORT
-              </Button>
+              <div className="flex justify-center gap-4">
+                <Button
+                  color="failure"
+                  onClick={() => handleDelete(commentToDelete)}
+                >
+                  DELETE
+                </Button>
+                <Button color="gray" onClick={() => setShowModal(false)}>
+                  ABORT
+                </Button>
+              </div>
             </div>
-          </div>
-        </Modal.Body>
-
+          </Modal.Body>
         </div>
       </Modal>
     </div>
