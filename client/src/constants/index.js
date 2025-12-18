@@ -2,17 +2,17 @@ export const category = [
   {
     id: "1",
     title: "Scripts",
-    color: ["#007BFF"],
+    color: ["#39FF14"],
   },
   {
     id: "2",
     title: "Linux",
-    color: ["#FFEA00"],
+    color: ["#FF00FF"],
   },
   {
     id: "3",
     title: "Red Team",
-    color: ["#FF00FF"],
+    color: ["#FF1B1C"],
   },
   {
     id: "4",
@@ -22,12 +22,12 @@ export const category = [
   {
     id: "5",
     title: "Blue Team",
-    color: ["#39FF14"],
+    color: ["#007BFF"],
   },
   {
     id: "6",
     title: "ChatGPT",
-    color: ["#FF1B1C"],
+    color: ["#FFEA00"],
   },
   {
     id: "7",

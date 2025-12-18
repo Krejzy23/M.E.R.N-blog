@@ -59,7 +59,7 @@ export default function DashSidebar() {
         w-full md:w-52
         bg-black/80 backdrop-blur
         border-r border-cyan-500/30
-        min-h-screen mt-20
+        md:min-h-screen mt-20
       "
     >
       <div className="px-4 py-4 border-b border-cyan-500/20">

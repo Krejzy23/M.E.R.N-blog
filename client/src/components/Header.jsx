@@ -46,8 +46,8 @@ export default function Header() {
         "
       >
         {/* LOGO */}
-        <Link to="/" className="text-green-400 text-lg tracking-widest">
-          root@AK_lab:~$
+        <Link to="/" className="text-green-400 text-sm md:text-md lg:text-lg  tracking-widest">
+          root@AK-lab:~$
         </Link>
 
         {/* NAV */}

@@ -22,6 +22,7 @@ export default function CallToAction() {
         <a
           href="https://mac-os-port-three.vercel.app/"
           className="border border-cyan-500/30 px-3 py-1 text-cyan-400 hover:bg-cyan-500/10 transition"
+          target="_blank"
         >
           open portfolio
         </a>

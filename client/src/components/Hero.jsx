@@ -1,32 +1,43 @@
 import { useEffect, useState } from "react";
 
+const BOOT_LINES = [
+  "[ OK ] Initializing system",
+  "[ OK ] Loading profile modules",
+  "[ OK ] Mounting /about",
+  "[ OK ] Mounting /projects",
+  "[ OK ] Starting terminal service",
+  "",
+  "Boot sequence complete",
+];
+
 export default function Hero() {
-  const [text, setText] = useState("");
-  const fullText = "> initializing personal lab...";
+  const [bootIndex, setBootIndex] = useState(0);
+  const [bootDone, setBootDone] = useState(false);
 
   useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      setText(fullText.slice(0, i));
-      i++;
-      if (i > fullText.length) clearInterval(interval);
-    }, 40);
-    return () => clearInterval(interval);
-  }, []);
+    if (bootIndex < BOOT_LINES.length) {
+      const t = setTimeout(() => {
+        setBootIndex((prev) => prev + 1);
+      }, 420);
+      return () => clearTimeout(t);
+    } else {
+      setTimeout(() => setBootDone(true), 600);
+    }
+  }, [bootIndex]);
 
   return (
-    <div className="relative min-h-[90vh] flex items-center justify-center bg-[#0b0f19] overflow-hidden">
+    <div className="relative min-h-[90vh] flex items-center justify-center bg-[#0b0f19] overflow-hidden font-mono">
       
       {/* background grid */}
-      <div className="absolute inset-0 opacity-10 text-transparent bg-[linear-gradient(rgba(34,211,238,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" />
+      <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(34,211,238,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
-      <div className="relative z-10 max-w-3xl px-6 text-center font-mono text-cyan-400">
-        
+      <div className="flex flex-col items-center justify-center relative z-10 max-w-3xl px-6 w-full text-center text-cyan-400">
+
         <p className="text-sm mb-4 tracking-widest text-cyan-500/70">
           SYSTEM STATUS: ONLINE
         </p>
 
-        <h1 className="text-3xl md:text-5xl font-bold text-cyan-300 mb-6">
+        <h1 className="text-3xl md:text-5xl font-bold text-cyan-300 mb-4">
           ALEŠ KREJZL
         </h1>
 
@@ -34,25 +45,40 @@ export default function Hero() {
           Security Research • Hardware Hacking • Linux
         </p>
 
-        <div className="text-left bg-black/40 border border-cyan-500/30 rounded-md p-4 mb-8">
-          <span className="text-green-400">{text}</span>
-          <span className="animate-pulse">▌</span>
+        {/* TERMINAL – PŘESNĚ TADY */}
+        <div className="text-left w-1/2 bg-black/40 border border-cyan-500/30 rounded-sm p-4 mb-8 transition-all duration-500">
+          {!bootDone ? (
+            <>
+              {BOOT_LINES.slice(0, bootIndex).map((line, i) => (
+                <div key={i} className="text-green-400 text-sm">
+                  {line}
+                </div>
+              ))}
+              <span className="animate-pulse text-green-400">▌</span>
+            </>
+          ) : (
+            <div className="text-green-400 text-center text-sm">
+              user@AK-lab:~$ _ <span className="animate-pulse">▌</span>
+            </div>
+          )}
         </div>
 
-        <div className="flex justify-center gap-4">
+        {/* CTA */}
+        <div className={`flex justify-center gap-4 transition-opacity duration-500 ${bootDone ? "opacity-100" : "opacity-0"}`}>
           <a
-            href="#posts"
+            href="/search"
             className="px-6 py-2 border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black transition"
           >
             VIEW LOGS
           </a>
           <a
-            href="#contact"
+            href="/about"
             className="px-6 py-2 border border-green-400 text-green-300 hover:bg-green-400 hover:text-black transition"
           >
             OPEN CHANNEL
           </a>
         </div>
+
       </div>
     </div>
   );

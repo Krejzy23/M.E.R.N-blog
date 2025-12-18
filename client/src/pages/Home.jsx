@@ -1,11 +1,9 @@
 import { Link } from "react-router-dom";
-import CallToAction from "../components/CallToAction";
 import { useEffect, useState } from "react";
 import PostCard from "../components/PostCard";
 import Hero from "../components/Hero";
 import ActiveModules from "../components/ActiveModules";
 import Section from "../components/Section";
-import Tagline from "../components/Tagline";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/all";
 import LogHeader from "../components/LogHeader";
