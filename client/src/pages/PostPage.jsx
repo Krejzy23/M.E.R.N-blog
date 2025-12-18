@@ -67,7 +67,7 @@ export default function PostPage() {
         src={post.image}
         alt={post.title}
         className="mt-8
-        max-w-3xl mx-auto
+        max-w-2xl mx-auto
         w-full
         max-h-[500px]
         object-cover
@@ -75,7 +75,7 @@ export default function PostPage() {
       />
 
       <div
-        className="post-content font-mono text-green-300 bg-black/60 border border-cyan-500/20 p-6 mt-10 max-w-3xl mx-auto leading-relaxed"
+        className="post-content font-mono text-green-300 bg-black/60 border border-cyan-500/20 p-6 mt-10 max-w-sm md:max-w-xl lg:max-w-2xl mx-auto leading-relaxed"
         dangerouslySetInnerHTML={{ __html: post && post.content }}
       ></div>
       <div className="max-w-4xl mx-auto w-full">
