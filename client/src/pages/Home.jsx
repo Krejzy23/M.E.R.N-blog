@@ -4,11 +4,8 @@ import PostCard from "../components/PostCard";
 import Hero from "../components/Hero";
 import ActiveModules from "../components/ActiveModules";
 import Section from "../components/Section";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/all";
 import LogHeader from "../components/LogHeader";
 
-gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
   const [posts, setPosts] = useState([]);

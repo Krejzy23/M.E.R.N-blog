@@ -58,7 +58,7 @@ export default function Hero() {
             </>
           ) : (
             <div className="text-green-400 text-center text-sm">
-              user@AK-lab:~$ _ <span className="animate-pulse">▌</span>
+              user@AK-lab:~$_ <span className="animate-pulse">▌</span>
             </div>
           )}
         </div>

@@ -56,7 +56,7 @@ export default function Header() {
             home
           </Link>
           <Link to="/projects" className={isActive("/projects")}>
-            projects
+            lab
           </Link>
           <Link to="/about" className={isActive("/about")}>
             about
@@ -81,7 +81,7 @@ export default function Header() {
                 onClick={() => setOpen(false)}
                 className="block px-4 py-3 hover:bg-cyan-500/10 text-cyan-500"
               >
-                projects
+                lab
               </Link>
 
               <Link
