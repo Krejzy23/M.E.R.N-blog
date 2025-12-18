@@ -115,9 +115,9 @@ export default function Search() {
               className=" text-green-400 border-cyan-500/30"
               style={{
                 background: "#0b0f19",
-                color: "#22c55e",        // text
+                color: "#22c55e", // text
                 border: "1px solid #00ffff", // barva a tloušťka borderu
-                borderRadius: "0px",     // hranaté rohy
+                borderRadius: "0px", // hranaté rohy
                 padding: "0.5 rem 0.5rem", // vnitřní odsazení
               }}
             />
@@ -132,9 +132,9 @@ export default function Search() {
               className="bg-black text-green-400 border-cyan-500/30"
               style={{
                 background: "#0b0f19",
-                color: "#22c55e",        // text
+                color: "#22c55e", // text
                 border: "1px solid #00ffff", // barva a tloušťka borderu
-                borderRadius: "0px",     // hranaté rohy
+                borderRadius: "0px", // hranaté rohy
                 padding: "0.5 rem 0.5rem", // vnitřní odsazení
               }}
             >
@@ -153,17 +153,22 @@ export default function Search() {
               onChange={handleChange}
               style={{
                 background: "#0b0f19",
-                color: "#22c55e",        // text
+                color: "#22c55e", // text
                 border: "1px solid #00ffff", // barva a tloušťka borderu
-                borderRadius: "0px",     // hranaté rohy
+                borderRadius: "0px", // hranaté rohy
                 padding: "0.5 rem 0.5rem", // vnitřní odsazení
               }}
             >
-              <option value="uncategorized">any</option>
-              <option value="Coding">Coding</option>
-              <option value="Ai">AI</option>
+              <option value="uncategorized">Select a category</option>
+              <option value="Red Team">Red Team</option>
+              <option value="Blue Team">Blue Team</option>
+              <option value="Scripts">Scripts</option>
+              <option value="Flashing">Flashing</option>
+              <option value="Wifi">WiFi</option>
+              <option value="Linux">Linux</option>
               <option value="Crypto">Crypto</option>
-              {/* zbytek */}
+              <option value="Coding">Coding</option>
+              <option value="ChatGPT">ChatGPT</option>
             </Select>
           </div>
 

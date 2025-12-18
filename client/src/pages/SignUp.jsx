@@ -1,127 +1,135 @@
-import { Label, TextInput, Button, Alert, Spinner } from 'flowbite-react'
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Label, TextInput, Button, Alert, Spinner } from 'flowbite-react';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import OAuth from '../components/OAuth';
+import { HiTerminal } from 'react-icons/hi';
 
 export default function SignUp() {
-  const [ formData, setFormData ] = useState({});
-  const [ errorMessage, setErrorMessage ] = useState(null);
-  const [ loading, setLoading ] = useState(false);
+  const [formData, setFormData] = useState({});
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id] : e.target.value.trim() });
+    setFormData({ ...formData, [e.target.id]: e.target.value.trim() });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!formData.username || !formData.email || !formData.password) {
-      return setErrorMessage('Please fill out all fields.');
+      return setErrorMessage('Missing required fields');
     }
 
     try {
       setLoading(true);
-
       setErrorMessage(null);
 
-      const res = await fetch('/api/auth/signup',{
+      const res = await fetch('/api/auth/signup', {
         method: 'POST',
-        headers: { 'Content-Type' : 'application/json' },
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
       });
 
       const data = await res.json();
 
-      if(data.succes === false ){
+      if (data.success === false) {
+        setLoading(false);
         return setErrorMessage(data.message);
       }
+
       setLoading(false);
-      if(res.ok) {
+      if (res.ok) {
         navigate('/sign-in');
       }
     } catch (error) {
       setErrorMessage(error.message);
       setLoading(false);
     }
-  }
+  };
+
   return (
-    <div className='min-h-screen mt-20'>
-      <div className='flex flex-col p-3 max-w-3xl mx-auto md:flex-row md:items-center gap-5'>
-        <div className='flex-1'>
-          <Link 
-            to="/" 
-            className='font-bold dark:text-white text-4xl'
-          >
-            <span className='px-2 py-1 bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg text-white'>
-              Krejzy
-            </span>
-            Blog
-          </Link>
-          <p className='text-sm mt-5'>
-            You can sign up with your email and 
-            password
-            or with Google.
-          </p>
+    <div className="min-h-screen flex items-center justify-center bg-[#0b0f19] text-cyan-300 font-mono px-4">
+      <div className="w-full max-w-md border border-cyan-500/30 bg-black/40 backdrop-blur rounded p-6 shadow-lg">
+
+        {/* header */}
+        <div className="flex items-center gap-2 mb-6 text-cyan-400">
+          <HiTerminal />
+          <span className="uppercase text-sm tracking-widest">
+            AUTH :: CREATE USER
+          </span>
         </div>
 
-        <div className='flex-1'>
-          <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-            <div>
-              <Label value='Your username'/>
-              <TextInput 
-                type='text'
-                placeholder='Username'
-                id='username'
-                onChange={handleChange}        
-              />
-            </div>
-            <div>
-              <Label value='Your email'/>
-              <TextInput 
-                type='text'
-                placeholder='name@company.com'
-                id='email'
-                onChange={handleChange}
-              />
-            </div>
-            <div>
-              <Label value='Your password'/>
-              <TextInput 
-                type='password'
-                placeholder='Password'
-                id='password'
-                onChange={handleChange}
-              />
-            </div>
-            <Button gradientDuoTone='purpleToPink' type='submit' disabled={loading}>
-              {
-                loading ? (
-                  <>
-                    <Spinner size='sm' />
-                    <span className='pl-3'>
-                      Loading...
-                    </span>
-                  </>
-                ) : 'Sign Up'
-              }
-            </Button>
-            <OAuth />
-          </form>
-          <div className='flex text-sm mt-3 gap-2'>
-            <span>Have an account?</span>
-            <Link to="/sign-in" className='text-blue-500'>
-              Sign In
-            </Link>
+        {/* system message */}
+        <p className="text-xs text-cyan-500 mb-6">
+          &gt; initializing user registration
+        </p>
+
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <div>
+            <Label value="USERNAME" className="text-cyan-500 text-xs" />
+            <TextInput
+              id="username"
+              type="text"
+              placeholder="operator"
+              onChange={handleChange}
+              className="bg-black border-cyan-500/30 text-cyan-300"
+            />
           </div>
-          {
-            errorMessage && (
-              <Alert className='mt-5' color='failure'>
-                {errorMessage}
-              </Alert>
-            )
-          }
+
+          <div>
+            <Label value="EMAIL" className="text-cyan-500 text-xs" />
+            <TextInput
+              id="email"
+              type="text"
+              placeholder="user@system.local"
+              onChange={handleChange}
+              className="bg-black border-cyan-500/30 text-cyan-300"
+            />
+          </div>
+
+          <div>
+            <Label value="PASSWORD" className="text-cyan-500 text-xs" />
+            <TextInput
+              id="password"
+              type="password"
+              placeholder="********"
+              onChange={handleChange}
+              className="bg-black border-cyan-500/30 text-cyan-300"
+            />
+          </div>
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="bg-cyan-600/20 border border-cyan-400 text-cyan-300 hover:bg-cyan-500/30"
+          >
+            {loading ? (
+              <>
+                <Spinner size="sm" />
+                <span className="pl-3">CREATING USER</span>
+              </>
+            ) : (
+              'EXECUTE REGISTER'
+            )}
+          </Button>
+
+          <OAuth />
+        </form>
+
+        <div className="text-xs text-cyan-500 mt-4">
+          &gt; existing user?{' '}
+          <Link to="/sign-in" className="text-cyan-300 hover:underline">
+            authenticate
+          </Link>
         </div>
+
+        {errorMessage && (
+          <Alert color="failure" className="mt-4 text-sm">
+            {errorMessage}
+          </Alert>
+        )}
       </div>
     </div>
-  )
+  );
 }
