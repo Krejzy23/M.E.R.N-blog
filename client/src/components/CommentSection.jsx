@@ -138,7 +138,7 @@ export default function CommentSection({ postId }) {
       {currentUser && (
         <form
           onSubmit={handleSubmit}
-          className="border border-teal-500 rounded-md p-3"
+          className="border bg-black/80 border-teal-500 rounded-md p-3"
         >
           <Textarea
             placeholder="> write_message --max 200"

@@ -6,7 +6,6 @@ import ActiveModules from "../components/ActiveModules";
 import Section from "../components/Section";
 import LogHeader from "../components/LogHeader";
 
-
 export default function Home() {
   const [posts, setPosts] = useState([]);
 
@@ -39,28 +38,27 @@ export default function Home() {
         customPaddings
       >
         <div className="max-w-6xl mx-auto flex flex-col gap-8 py-7">
-          
           {posts && posts.length > 0 && (
-            <div className="flex flex-col gap-6 ">
-              <h2 className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 max-w-lg lg:text-5xl md:text-3xl text-md tracking-[0.3rem] font-mono font-semibold text-green-400 border border-cyan-500/30 bg-black/80 backdrop-blur z-50">
+            <div className="flex flex-col p-4 gap-6 ">
+              <h2 className="absolute top-80 left-1/2 transform -translate-x-1/2 -translate-y-1/2 p-5 max-w-lg lg:text-5xl md:text-3xl text-md tracking-[0.3rem] font-mono font-semibold text-cyan-400 border hover:text-green-400 hover:bg-cyan-500/10 border-cyan-500/30 bg-black/80 transition backdrop-blur z-50">
                 SYSTEM LOGS
               </h2>
               <ActiveModules />
-              <div className="relative px-3 z-40">
+              <div className="relative mt-5 z-40">
                 <LogHeader
                   command="tail --latest system.log"
                   result={`showing ${posts.length} entries`}
                 />
               </div>
 
-              <div className="flex flex-wrap pt-8 pb-8 gap-4 justify-center p-5 border-stroke-soft border-1">
+              <div className="flex flex-wrap pt-16 pb-8 gap-4 justify-center p-5 bg-black/80 border-cyan-500/30 border-1">
                 {posts.map((post) => (
                   <PostCard key={post._id} post={post} />
                 ))}
               </div>
               <Link
                 to={"/search"}
-                className="relative left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 max-w-lg border border-cyan-500/30 text-cyan-400 font-mono bg-black/80 backdrop-blur hover:bg-cyan-500/10 hover:text-green-400 transition text-center text-xl z-50"
+                className="relative left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 max-w-xs md:max-w-md border border-cyan-500/30 text-cyan-400 font-mono bg-black/80 backdrop-blur hover:bg-cyan-500/10 hover:text-green-400 transition text-center text-sm md:text-xl z-50"
               >
                 View all logs
               </Link>

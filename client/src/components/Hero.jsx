@@ -27,13 +27,11 @@ export default function Hero() {
 
   return (
     <div className="relative min-h-[90vh] flex items-center justify-center bg-[#0b0f19] overflow-hidden font-mono">
-      
       {/* background grid */}
       <div className="absolute inset-0 opacity-10 bg-[linear-gradient(rgba(34,211,238,0.15)_1px,transparent_1px),linear-gradient(90deg,rgba(34,211,238,0.15)_1px,transparent_1px)] bg-[size:40px_40px]" />
 
       <div className="flex flex-col items-center justify-center relative z-10 max-w-3xl px-6 w-full text-center text-cyan-400">
-
-        <p className="text-sm mb-4 tracking-widest text-cyan-500/70">
+        <p className="text-xs md:text-base mb-4 tracking-widest text-cyan-500/70">
           SYSTEM STATUS: ONLINE
         </p>
 
@@ -41,12 +39,12 @@ export default function Hero() {
           ALEŠ KREJZL
         </h1>
 
-        <p className="text-base md:text-lg text-cyan-400 mb-6">
+        <p className="text-sm md:text-lg text-cyan-400 mb-6">
           Security Research • Hardware Hacking • Linux
         </p>
 
         {/* TERMINAL – PŘESNĚ TADY */}
-        <div className="text-left w-1/2 bg-black/40 border border-cyan-500/30 rounded-sm p-4 mb-8 transition-all duration-500">
+        <div className="text-left w-96 bg-black/40 border border-cyan-500/30 rounded-sm p-4 mb-8 transition-all duration-500">
           {!bootDone ? (
             <>
               {BOOT_LINES.slice(0, bootIndex).map((line, i) => (
@@ -64,21 +62,28 @@ export default function Hero() {
         </div>
 
         {/* CTA */}
-        <div className={`flex justify-center gap-4 transition-opacity duration-500 ${bootDone ? "opacity-100" : "opacity-0"}`}>
+        <div
+          className={`flex justify-center gap-4 transition-opacity duration-500 ${
+            bootDone ? "opacity-100" : "opacity-0"
+          }`}
+        >
           <a
             href="/search"
-            className="px-6 py-2 border border-cyan-400 text-cyan-300 hover:bg-cyan-400 hover:text-black transition"
+            className="group relative flex items-center gap-2 px-4 py-2 md:px-6 md:py-2 border border-cyan-500/40 text-cyan-400 font-mono text-sm md:text-base hover:text-green-300 hover:border-green-400 transition overflow-hidden"
           >
-            VIEW LOGS
+            {/* glow */}
+            <span className="absolute inset-0 bg-green-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
+            <span className="relative z-10">&gt; view.logs</span>
           </a>
           <a
             href="/about"
-            className="px-6 py-2 border border-green-400 text-green-300 hover:bg-green-400 hover:text-black transition"
+            className="group relative flex items-center gap-2 px-4 py-2 md:px-6 md:py-2 border border-green-500/40 text-green-400 font-mono text-sm md:text-base hover:text-cyan-300 hover:border-cyan-400 transition overflow-hidden"
           >
-            OPEN CHANNEL
+            {/* glow */}
+            <span className="absolute inset-0 bg-cyan-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
+            <span className="relative z-10">&gt; open.channel</span>
           </a>
         </div>
-
       </div>
     </div>
   );

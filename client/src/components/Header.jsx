@@ -36,22 +36,22 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 ">
-      <div
-        className="
-          max-w-7xl mx-auto mt-2 px-6 py-3
-          flex items-center justify-between
-          bg-black/80 backdrop-blur
-          border border-cyan-500/20
-          font-mono
-        "
-      >
+      <div className="max-w-7xl mx-auto mt-2 px-6 py-3 flex items-center justify-between bg-black/80 backdrop-blur border border-stroke-soft font-mono">
         {/* LOGO */}
-        <Link to="/" className="text-green-400 text-sm md:text-md lg:text-lg  tracking-widest">
-          root@AK-lab:~$
+        <Link
+          to="/"
+          className="font-mono text-cyan-400 text-sm md:text-md lg:text-lg tracking-widest hover:text-green-300 transition flex items-center gap-2"
+        >
+          <span>root@AK-lab:~$</span>
+
+          {/* mobile hint */}
+          <span className="md:hidden text-green-400 flex items-center gap-1">
+            cd /<span className="animate-pulse">▌</span>
+          </span>
         </Link>
 
         {/* NAV */}
-        <nav className="hidden md:flex gap-6 text-md">
+        <nav className="hidden md:flex gap-6 text-xl">
           <Link to="/" className={isActive("/")}>
             home
           </Link>
@@ -129,15 +129,10 @@ export default function Header() {
           <form onSubmit={handleSearch} className="hidden lg:block">
             <input
               type="text"
-              placeholder="search logs..."
+              placeholder={`grep -i "query" logs/`}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="
-                bg-black border border-cyan-500/30
-                text-green-400 text-sm px-3 py-1
-                focus:outline-none focus:border-green-400
-                placeholder-cyan-500/50
-              "
+              className="bg-[#0b0f19] border border-stroke-soft text-green-400 text-sm px-6 py-2 focus:outline-none focus:border-green-400 placeholder-cyan-500/50 placeholder:w-52"
             />
           </form>
 
@@ -156,27 +151,28 @@ export default function Header() {
                 <img
                   src={currentUser.profilePicture}
                   alt="user"
+                  onClick={() => setOpen((prev) => !prev)}
                   className="
                   w-9 h-9 rounded-full border
                   border-cyan-500/40 cursor-pointer
                   hover:border-green-400 transition
                 "
-                  onMouseEnter={() => setOpen(true)}
-                  onMouseLeave={() => setOpen(false)}
                 />
 
                 {/* DROPDOWN */}
                 <div
-                  className="
+                  className={`
                   absolute right-0 mt-3 w-52
                   bg-black/90 backdrop-blur
                   border border-cyan-500/30
                   text-sm
-                  opacity-0 scale-95
-                  group-hover:opacity-100 group-hover:scale-100
-                  pointer-events-none group-hover:pointer-events-auto
                   transition-all duration-200
-                "
+                  ${
+                    open
+                      ? "opacity-100 scale-100 pointer-events-auto"
+                      : "opacity-0 scale-95 pointer-events-none"
+                  }
+                `}
                 >
                   <div className="px-4 py-3 border-b border-cyan-500/20">
                     <p className="text-green-400">@{currentUser.username}</p>
@@ -193,11 +189,11 @@ export default function Header() {
                   </Link>
 
                   <button
-                    onClick={handleSignout}
-                    className="
-                    w-full text-left px-4 py-2
-                    text-red-400 hover:bg-red-500/10
-                  "
+                    onClick={() => {
+                      setOpen(false);
+                      handleSignout();
+                    }}
+                    className="w-full text-left px-4 py-2 text-red-400 hover:bg-red-500/10"
                   >
                     exit
                   </button>
@@ -216,9 +212,9 @@ export default function Header() {
           {/* MOBILE MENU BUTTON */}
           <button
             onClick={() => setOpen(!open)}
-            className="md:hidden text-cyan-500 hover:text-green-400 transition"
+            className="md:hidden text-cyan-500 hover:text-green-500 transition"
           >
-            <FaBars size={18} />
+            <FaBars size={22} />
           </button>
         </div>
       </div>

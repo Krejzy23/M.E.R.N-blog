@@ -119,7 +119,7 @@ export default function AboutTerminal() {
   };
 
   return (
-    <div className="bg-black text-green-400 font-mono p-4 rounded-lg shadow-lg h-[500px] overflow-y-auto">
+    <div className="border border-cyan-500/30 bg-black/80 text-green-400 font-mono p-4 rounded-sm shadow-lg h-[500px] overflow-y-auto">
       {lines.map((line, i) => (
         <pre key={i}>{line}</pre>
       ))}
