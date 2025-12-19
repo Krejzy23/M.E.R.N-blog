@@ -1,13 +1,11 @@
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { FaMoon, FaSun, FaBars } from "react-icons/fa";
-import { toggleTheme } from "../redux/theme/themeSlice";
+import { FaBars } from "react-icons/fa";
 import { signoutSuccess } from "../redux/user/userSlice";
 import { useState } from "react";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
-  const { theme } = useSelector((state) => state.theme);
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -136,14 +134,6 @@ export default function Header() {
             />
           </form>
 
-          {/* THEME TOGGLE */}
-          <button
-            onClick={() => dispatch(toggleTheme())}
-            className="text-cyan-500 hover:text-green-400 transition"
-          >
-            {theme === "light" ? <FaMoon /> : <FaSun />}
-          </button>
-
           {/* AUTH */}
           <div className="hidden md:block">
             {currentUser ? (
@@ -153,7 +143,7 @@ export default function Header() {
                   alt="user"
                   onClick={() => setOpen((prev) => !prev)}
                   className="
-                  w-9 h-9 rounded-full border
+                  w-9 h-9 border border-sm
                   border-cyan-500/40 cursor-pointer
                   hover:border-green-400 transition
                 "

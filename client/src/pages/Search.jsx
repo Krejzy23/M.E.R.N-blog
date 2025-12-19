@@ -2,7 +2,10 @@ import { Button, Select, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import PostCard from "../components/PostCard";
+import { CATEGORY_OPTIONS } from "../constants";
+import { SORT_OPTIONS } from "../constants";
 import SearchCommandPreview from "../components/SearchCommandPreview";
+import CategoryDropdown from "../components/design/CustomDropdown";
 
 export default function Search() {
   const [sidebarData, setSidebarData] = useState({
@@ -70,12 +73,23 @@ export default function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const urlParams = new URLSearchParams(location.search);
-    urlParams.set("searchTerm", sidebarData.searchTerm || "");
-    urlParams.set("sort", sidebarData.sort || "desc");
-    urlParams.set("category", sidebarData.category);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+  
+    const urlParams = new URLSearchParams();
+  
+    if (sidebarData.searchTerm) {
+      urlParams.set("searchTerm", sidebarData.searchTerm);
+    }
+  
+    if (sidebarData.sort) {
+      urlParams.set("sort", sidebarData.sort);
+    }
+  
+    // 🔥 IMPORTANT
+    if (sidebarData.category !== "uncategorized") {
+      urlParams.set("category", sidebarData.category);
+    }
+  
+    navigate(`/search?${urlParams.toString()}`);
   };
 
   const handleShowMore = async () => {
@@ -125,51 +139,28 @@ export default function Search() {
 
           <div>
             <label className="text-cyan-400 text-xs block mb-1">--sort</label>
-            <Select
-              id="sort"
+
+            <CategoryDropdown
               value={sidebarData.sort}
-              onChange={handleChange}
-              className="bg-black text-green-400 border-cyan-500/30"
-              style={{
-                background: "#0b0f19",
-                color: "#22c55e", // text
-                border: "1px solid #00ffff", // barva a tloušťka borderu
-                borderRadius: "0px", // hranaté rohy
-                padding: "0.5 rem 0.5rem", // vnitřní odsazení
-              }}
-            >
-              <option value="desc">latest</option>
-              <option value="asc">oldest</option>
-            </Select>
+              options={SORT_OPTIONS}
+              placeholder="order --by"
+              onChange={(val) => setSidebarData({ ...sidebarData, sort: val })}
+            />
           </div>
 
           <div>
             <label className="text-cyan-400 text-xs block mb-1">
               --category
             </label>
-            <Select
-              id="category"
+
+            <CategoryDropdown
               value={sidebarData.category}
-              onChange={handleChange}
-              style={{
-                background: "#0b0f19",
-                color: "#22c55e", // text
-                border: "1px solid #00ffff", // barva a tloušťka borderu
-                borderRadius: "0px", // hranaté rohy
-                padding: "0.5 rem 0.5rem", // vnitřní odsazení
-              }}
-            >
-              <option value="uncategorized">Select a category</option>
-              <option value="Red Team">Red Team</option>
-              <option value="Blue Team">Blue Team</option>
-              <option value="Scripts">Scripts</option>
-              <option value="Flashing">Flashing</option>
-              <option value="Wifi">WiFi</option>
-              <option value="Linux">Linux</option>
-              <option value="Crypto">Crypto</option>
-              <option value="Coding">Coding</option>
-              <option value="ChatGPT">ChatGPT</option>
-            </Select>
+              options={CATEGORY_OPTIONS}
+              placeholder="filter --category"
+              onChange={(val) =>
+                setSidebarData({ ...sidebarData, category: val })
+              }
+            />
           </div>
 
           <Button

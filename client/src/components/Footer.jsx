@@ -8,8 +8,9 @@ export default function FooterCom() {
         {/* COMMAND LINE */}
         <div className="mb-6 text-sm md:text-base text-cyan-400">
           <p>
-            <span className="text-green-400">&gt;</span> system.footer --status
-            online
+            <span className="text-green-400">&gt;</span>
+            <span className="text-green-400"> system.footer --status
+            online</span> 
           </p>
           <p className="mt-1 text-cyan-400/70">
             &gt; awaiting connections

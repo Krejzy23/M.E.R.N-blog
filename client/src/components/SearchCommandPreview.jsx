@@ -11,8 +11,9 @@ export default function SearchCommandPreview({ total }) {
   return (
     <div className="mb-6 font-mono text-sm text-green-400 bg-black/80 border border-cyan-500/30 rounded-md p-4">
       <p>
-        <span className="text-cyan-400">&gt;</span>{" "}
-        search
+        <span className="text-green-400">&gt;</span>{" "}
+        <span className="text-green-400">tail --searchTerm </span>
+        
         {term && <span> --term "{term}"</span>}
         {category && category !== "uncategorized" && (
           <span> --category {category}</span>

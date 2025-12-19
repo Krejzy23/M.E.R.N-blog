@@ -60,7 +60,7 @@ export default function Home() {
                 to={"/search"}
                 className="relative left-1/2 -translate-x-1/2 -translate-y-1/2 p-5 max-w-xs md:max-w-md border border-cyan-500/30 text-cyan-400 font-mono bg-black/80 backdrop-blur hover:bg-cyan-500/10 hover:text-green-400 transition text-center text-sm md:text-xl z-50"
               >
-                View all logs
+                cat /var/logs/*
               </Link>
             </div>
           )}

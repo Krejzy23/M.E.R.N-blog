@@ -46,6 +46,24 @@ export const category = [
   },
 ];
 
+export const CATEGORY_OPTIONS = [
+  { value: "uncategorized", label: "all categories" },
+  { value: "Red Team", label: "Red Team" },
+  { value: "Blue Team", label: "Blue Team" },
+  { value: "Scripts", label: "Scripts" },
+  { value: "Flashing", label: "Flashing" },
+  { value: "Wifi", label: "WiFi" },
+  { value: "Linux", label: "Linux" },
+  { value: "Crypto", label: "Crypto" },
+  { value: "Coding", label: "Coding" },
+  { value: "ChatGPT", label: "ChatGPT" },
+];
+
+export const SORT_OPTIONS = [
+  { value: "desc", label: "latest" },
+  { value: "asc", label: "oldest" },
+];
+
 export const LAB_FS = {
   lab: {
     pwnagotchi: {
