@@ -60,31 +60,31 @@ export default function DashComments() {
   };
 
   return (
-    <div className='font-mono bg-black text-green-400 border border-green-700 rounded-md p-4 overflow-x-auto md:mt-20'>
-      <h2 className='text-lg mb-4 text-green-500'>
+    <div className='font-mono text-green-400 p-4 overflow-x-auto md:mt-20'>
+      <h2 className='text-lg mb-4 text-green-400'>
         $ tail -f /var/log/comments.log
       </h2>
 
       {currentUser.isAdmin && comments.length > 0 ? (
         <>
-          <Table className='bg-black text-green-400'>
-            <Table.Head className='bg-black border-b border-green-700'>
-              <Table.HeadCell className='text-green-500'>
+          <Table className='bg-black/80 border border-green-700 text-green-400'>
+            <Table.Head className='bg-black/80 border-b border-green-700'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
                 UPDATED
               </Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
                 CONTENT
               </Table.HeadCell>
-              <Table.HeadCell className='text-cyan-400'>
+              <Table.HeadCell className='text-cyan-400 border-r-1 border-green-700 bg-black/80'>
                 LIKES
               </Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
                 POST_ID
               </Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
                 USER_ID
               </Table.HeadCell>
-              <Table.HeadCell className='text-red-400'>
+              <Table.HeadCell className='text-red-400 bg-black/80'>
                 RM
               </Table.HeadCell>
             </Table.Head>
@@ -134,7 +134,7 @@ export default function DashComments() {
           {showMore && (
             <button
               onClick={handleShowMore}
-              className='mt-4 text-green-500 hover:text-green-300'
+              className='mt-4 text-cyan-500 hover:text-cyan-300'
             >
               $ show --more
             </button>

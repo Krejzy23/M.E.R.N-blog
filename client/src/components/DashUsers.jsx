@@ -58,21 +58,21 @@ export default function DashUsers() {
   };
 
   return (
-    <div className='font-mono bg-black text-green-400 border border-green-700 rounded-md p-4 overflow-x-auto mt-20'>
+    <div className='font-mono text-green-400 p-4 overflow-x-auto mt-20'>
       <h2 className='text-lg mb-4 text-green-500'>
         $ cat /etc/users
       </h2>
 
       {currentUser.isAdmin && users.length > 0 ? (
         <>
-          <Table className='bg-black text-green-400'>
-            <Table.Head className='bg-black border-b border-green-700'>
-              <Table.HeadCell className='text-green-500'>CREATED</Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>AVATAR</Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>USERNAME</Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>EMAIL</Table.HeadCell>
-              <Table.HeadCell className='text-cyan-400'>ADMIN</Table.HeadCell>
-              <Table.HeadCell className='text-red-400'>DEL</Table.HeadCell>
+          <Table className='bg-black/80 border border-green-700 text-green-400'>
+            <Table.Head className='bg-black/80 border-b border-green-700'>
+              <Table.HeadCell className='text-green-500 bg-black/80'>CREATED</Table.HeadCell>
+              <Table.HeadCell className='text-green-500 bg-black/80'>AVATAR</Table.HeadCell>
+              <Table.HeadCell className='text-green-500 bg-black/80'>USERNAME</Table.HeadCell>
+              <Table.HeadCell className='text-green-500 bg-black/80'>EMAIL</Table.HeadCell>
+              <Table.HeadCell className='text-cyan-400 bg-black/80'>ADMIN</Table.HeadCell>
+              <Table.HeadCell className='text-red-400 bg-black/80'>DEL</Table.HeadCell>
             </Table.Head>
 
             <Table.Body className='divide-y divide-green-900'>
@@ -89,7 +89,7 @@ export default function DashUsers() {
                     <img
                       src={user.profilePicture}
                       alt={user.username}
-                      className='w-10 h-10 object-cover border border-green-700'
+                      className='w-10 h-10 object-cover'
                     />
                   </Table.Cell>
 

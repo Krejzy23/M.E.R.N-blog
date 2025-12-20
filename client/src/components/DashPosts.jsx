@@ -61,28 +61,28 @@ export default function DashPosts() {
   };
 
   return (
-    <div className='font-mono bg-black text-green-400 border border-green-700 rounded-md p-4 overflow-x-auto md:mt-20'>
+    <div className='font-mono text-green-400 p-4 overflow-x-auto md:mt-20'>
       <h2 className='text-lg mb-4 text-green-500'>
         $ ls ./posts
       </h2>
 
       {currentUser.isAdmin && userPosts.length > 0 ? (
         <>
-          <Table className='bg-black text-green-400'>
-            <Table.Head className='bg-black border-b border-green-700'>
-              <Table.HeadCell className='text-green-500'>UPDATED</Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>IMAGE</Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>TITLE</Table.HeadCell>
-              <Table.HeadCell className='text-green-500'>CATEGORY</Table.HeadCell>
-              <Table.HeadCell className='text-red-400'>DEL</Table.HeadCell>
-              <Table.HeadCell className='text-cyan-400'>EDIT</Table.HeadCell>
+          <Table className='bg-black/80 border border-cyan-500/30 text-green-400'>
+            <Table.Head className='bg-black/80 border-b border-cyan-500/30'>
+              <Table.HeadCell className='text-green-500 bg-black/80'>UPDATED</Table.HeadCell>
+              <Table.HeadCell className='text-green-500 bg-black/80'>IMAGE</Table.HeadCell>
+              <Table.HeadCell className='text-green-500 bg-black/80'>TITLE</Table.HeadCell>
+              <Table.HeadCell className='text-green-500 bg-black/80'>CATEGORY</Table.HeadCell>
+              <Table.HeadCell className='text-red-400 bg-black/80'>DEL</Table.HeadCell>
+              <Table.HeadCell className='text-cyan-400 bg-black/80'>EDIT</Table.HeadCell>
             </Table.Head>
 
-            <Table.Body className='divide-y divide-green-900'>
+            <Table.Body className='divide-y divide-cyan-500/30'>
               {userPosts.map((post) => (
                 <Table.Row
                   key={post._id}
-                  className='bg-black hover:bg-green-950 transition'
+                  className='bg-black/80 hover:bg-green-950 transition'
                 >
                   <Table.Cell>
                     {new Date(post.updatedAt).toLocaleDateString()}
@@ -93,7 +93,7 @@ export default function DashPosts() {
                       <img
                         src={post.image}
                         alt={post.title}
-                        className='w-24 h-12 object-cover border border-green-700'
+                        className='w-24 h-12 object-cover'
                       />
                     </Link>
                   </Table.Cell>

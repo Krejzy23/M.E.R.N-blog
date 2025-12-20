@@ -149,7 +149,7 @@ export default function DashProfile() {
           <img
             src={imageFileUrl || currentUser.profilePicture}
             alt="avatar"
-            className="absolute inset-0 w-full h-full rounded-full object-cover border border-cyan-500/40"
+            className="absolute inset-0 w-full h-full object-cover border border-cyan-500/40"
           />
         </div>
 

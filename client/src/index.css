@@ -43,7 +43,9 @@ body {
     top: 100%;
   }
 }
-
+.custom-hover tr:hover {
+  background-color: rgba(6, 182, 212, 0.1); /* #06b6d4 + 10% opacity */
+}
 
 .post-content h2 {
   color: #67e8f9;
