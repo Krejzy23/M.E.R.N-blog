@@ -65,8 +65,8 @@ export default function DashUsers() {
 
       {currentUser.isAdmin && users.length > 0 ? (
         <>
-          <Table className='bg-black/80 border border-green-700 text-green-400'>
-            <Table.Head className='bg-black/80 border-b border-green-700'>
+          <Table className='bg-black/80 border border-cyan-500/30 text-green-400'>
+            <Table.Head className='bg-black/80 border-b border-cyan-500/30'>
               <Table.HeadCell className='text-green-500 bg-black/80'>CREATED</Table.HeadCell>
               <Table.HeadCell className='text-green-500 bg-black/80'>AVATAR</Table.HeadCell>
               <Table.HeadCell className='text-green-500 bg-black/80'>USERNAME</Table.HeadCell>
@@ -75,7 +75,7 @@ export default function DashUsers() {
               <Table.HeadCell className='text-red-400 bg-black/80'>DEL</Table.HeadCell>
             </Table.Head>
 
-            <Table.Body className='divide-y divide-green-900'>
+            <Table.Body className='divide-y divide-cyan-500/30'>
               {users.map((user) => (
                 <Table.Row
                   key={user._id}

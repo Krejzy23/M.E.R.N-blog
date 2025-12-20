@@ -56,13 +56,13 @@ export default function DashSidebar() {
   return (
     <aside
       className="
-        w-full md:w-52
+        w-full md:w-52 md:h-full
         bg-black/80 backdrop-blur
-        border-r border-cyan-500/30
+        border-r border-stroke-soft
         md:min-h-screen mt-20
       "
     >
-      <div className="px-4 py-4 border-b border-cyan-500/20">
+      <div className="px-4 py-4 border-b border-t border-stroke-soft">
         <p className="text-xs font-mono text-cyan-400">
           ak@dashboard:~$
         </p>
@@ -108,7 +108,7 @@ export default function DashSidebar() {
           </>
         )}
 
-        <div className="mt-4 border-t border-cyan-500/20 pt-2">
+        <div className="mt-4 border-t border-stroke-soft pt-2">
           <button
             onClick={handleSignout}
             className="

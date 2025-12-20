@@ -1,6 +1,7 @@
-import { Button, Select, TextInput } from "flowbite-react";
+import { Button, TextInput } from "flowbite-react";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import { BsSearch } from "react-icons/bs";
 import PostCard from "../components/PostCard";
 import { CATEGORY_OPTIONS } from "../constants";
 import { SORT_OPTIONS } from "../constants";
@@ -73,22 +74,22 @@ export default function Search() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     const urlParams = new URLSearchParams();
-  
+
     if (sidebarData.searchTerm) {
       urlParams.set("searchTerm", sidebarData.searchTerm);
     }
-  
+
     if (sidebarData.sort) {
       urlParams.set("sort", sidebarData.sort);
     }
-  
+
     // 🔥 IMPORTANT
     if (sidebarData.category !== "uncategorized") {
       urlParams.set("category", sidebarData.category);
     }
-  
+
     navigate(`/search?${urlParams.toString()}`);
   };
 
@@ -173,9 +174,12 @@ export default function Search() {
       </div>
 
       <div className="w-full">
-        <h1 className="font-mono text-green-400 text-2xl p-3 mt-2 border-b border-cyan-500/20">
-          #search_results
-        </h1>
+        <div className=" border-cyan-500/20">
+          <div className="flex text-cyan-400 items-center px-5">
+            <BsSearch size={20} />
+            <h1 className="font-mono text-2xl p-3 mt-2">SEARCH_RESULTS</h1>
+          </div>
+        </div>
         <div className="px-7 pt-3">
           <SearchCommandPreview total={posts.length} />
         </div>

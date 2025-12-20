@@ -6,7 +6,7 @@ import {
   HiDocumentText,
   HiOutlineUserGroup,
 } from "react-icons/hi";
-import { Button, Table } from "flowbite-react";
+import { Table } from "flowbite-react";
 import { Link } from "react-router-dom";
 
 export default function DashboardComp() {
@@ -121,8 +121,8 @@ export default function DashboardComp() {
         </div>
       </div>
       <div className="flex flex-wrap gap-4 py-3 mx-auto justify-center">
-        <div className="flex flex-col w-full md:w-auto shadow-md p-2 font-mono font-semibold text-green-400 border border-cyan-500/30 bg-black/80 backdrop-blur">
-          <div className="flex justify-between  p-3 text-sm font-semibold">
+        <div className="flex flex-col w-full md:w-auto shadow-md p-5 font-mono font-semibold text-green-400 border border-cyan-500/30 bg-black/80 backdrop-blur">
+          <div className="flex justify-between items-center p-3 text-sm font-semibold -mt-5">
             <h1 className="text-center text-base p-1">Recent users</h1>
             <button className="group relative flex items-center gap-2 px-4 py-2 border border-cyan-500/40 text-cyan-400 font-mono text-sm hover:text-green-300 hover:border-green-400 transition overflow-hidden">
               <span className="absolute inset-0 bg-green-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
@@ -162,8 +162,8 @@ export default function DashboardComp() {
               ))}
           </Table>
         </div>
-        <div className="flex flex-col w-full md:w-auto shadow-md p-2 font-mono font-semibold text-green-400 border border-cyan-500/30 bg-black/80 backdrop-blur">
-          <div className="flex justify-between  p-3 text-sm font-semibold">
+        <div className="flex flex-col w-full md:w-auto shadow-md p-5 font-mono font-semibold text-green-400 border border-cyan-500/30 bg-black/80 backdrop-blur">
+          <div className="flex justify-between items-center -mt-5 p-3 text-sm font-semibold">
             <h1 className="text-center text-base p-1">Recent comments</h1>
             <button className="group relative flex items-center gap-2 px-4 py-2 border border-cyan-500/40 text-cyan-400 font-mono text-sm hover:text-green-300 hover:border-green-400 transition overflow-hidden">
               <span className="absolute inset-0 bg-green-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
@@ -191,8 +191,8 @@ export default function DashboardComp() {
               ))}
           </Table>
         </div>
-        <div className="flex flex-col w-full md:w-auto shadow-md p-2 font-mono font-semibold text-green-400 border border-cyan-500/30 bg-black/80 backdrop-blur">
-          <div className="flex justify-between  p-3 text-sm font-semibold">
+        <div className="flex flex-col w-full md:w-auto shadow-md p-5 md:p-10 font-mono font-semibold text-green-400 border border-cyan-500/30 bg-black/80 backdrop-blur">
+          <div className="flex justify-between items-center -mt-5 md:-mt-10 p-3 text-sm font-semibold">
             <h1 className="text-center text-base p-1">Recent posts</h1>
             <button className="group relative flex items-center gap-2 px-4 py-2 border border-cyan-500/40 text-cyan-400 font-mono text-sm hover:text-green-300 hover:border-green-400 transition overflow-hidden">
               <span className="absolute inset-0 bg-green-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />

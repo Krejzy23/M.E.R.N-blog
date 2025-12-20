@@ -68,9 +68,11 @@ Tools: Git, Linux, Docker`,
   "sudo rm -rf /": () => "Permission denied: nice try 😏",
   exploit: () => "No exploits found… yet.",
 
-  neofetch: () => `      /\\_/\\
-     ( o.o )  KrejzyOS
-      > ^ <   React | Security | Linux`,
+  neofetch: () => `
+     ()_/)
+     ( •_•)      KrejzyOS
+    / >🛡 <       React | Security | Linux
+    `,
 
   fallout: () => "War. War never changes.",
   coffee: () => "☕ Brewing coffee... Productivity +10%",
@@ -83,7 +85,18 @@ export default function AboutTerminal() {
     "System ready. Type 'help' to begin.",
   ]);
   const [input, setInput] = useState("");
+  const [history, setHistory] = useState([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
   const endRef = useRef(null);
+  const terminalRef = useRef(null);
+
+  useEffect(() => {
+    if (terminalRef.current) {
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
+    }
+  }, [lines]);
+
+  
 
   const runCommand = (cmd) => {
     if (cmd === "clear") {
@@ -113,13 +126,55 @@ export default function AboutTerminal() {
 
   const handleKeyDown = (e) => {
     if (e.key === "Enter") {
-      runCommand(input.trim());
+      const cmd = input.trim();
+      if (!cmd) return;
+  
+      runCommand(cmd);
+  
+      setHistory((prev) => [...prev, cmd]);
+      setHistoryIndex(-1); // reset indexu
+  
       setInput("");
     }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+    
+      if (history.length === 0) return;
+    
+      const newIndex =
+        historyIndex === -1
+          ? history.length - 1
+          : Math.max(0, historyIndex - 1);
+    
+      setHistoryIndex(newIndex);
+      setInput(history[newIndex]);
+    }
+    
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+    
+      if (history.length === 0) return;
+    
+      if (historyIndex === -1) return;
+    
+      const newIndex = historyIndex + 1;
+    
+      if (newIndex >= history.length) {
+        setHistoryIndex(-1);
+        setInput("");
+      } else {
+        setHistoryIndex(newIndex);
+        setInput(history[newIndex]);
+      }
+    }
+
   };
 
   return (
-    <div className="border border-cyan-500/30 bg-black/80 text-green-400 font-mono p-4 rounded-sm shadow-lg h-[500px] overflow-y-auto">
+    <div
+      ref={terminalRef}
+      className="border border-cyan-500/30 bg-black/80 text-green-400 font-mono p-4 rounded-sm shadow-lg h-[500px] overflow-y-auto"
+    >
       {lines.map((line, i) => (
         <pre key={i}>{line}</pre>
       ))}

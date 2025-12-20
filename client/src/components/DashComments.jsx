@@ -67,21 +67,21 @@ export default function DashComments() {
 
       {currentUser.isAdmin && comments.length > 0 ? (
         <>
-          <Table className='bg-black/80 border border-green-700 text-green-400'>
-            <Table.Head className='bg-black/80 border-b border-green-700'>
-              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
+          <Table className='bg-black/80 border border-cyan-500/30 text-green-400'>
+            <Table.Head className='bg-black/80 border-b border-cyan-500/30'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-cyan-500/30 bg-black/80'>
                 UPDATED
               </Table.HeadCell>
-              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-cyan-500/30 bg-black/80'>
                 CONTENT
               </Table.HeadCell>
-              <Table.HeadCell className='text-cyan-400 border-r-1 border-green-700 bg-black/80'>
+              <Table.HeadCell className='text-cyan-400 border-r-1 border-cyan-500/30 bg-black/80'>
                 LIKES
               </Table.HeadCell>
-              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-cyan-500/30 bg-black/80'>
                 POST_ID
               </Table.HeadCell>
-              <Table.HeadCell className='text-cyan-500 border-r-1 border-green-700 bg-black/80'>
+              <Table.HeadCell className='text-cyan-500 border-r-1 border-cyan-500/30 bg-black/80'>
                 USER_ID
               </Table.HeadCell>
               <Table.HeadCell className='text-red-400 bg-black/80'>
@@ -89,7 +89,7 @@ export default function DashComments() {
               </Table.HeadCell>
             </Table.Head>
 
-            <Table.Body className='divide-y divide-green-900'>
+            <Table.Body className='divide-y divide-cyan-500/30'>
               {comments.map((comment) => (
                 <Table.Row
                   key={comment._id}

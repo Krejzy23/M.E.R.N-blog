@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Section from "../components/Section.jsx";
-import { HiFolder, HiDocumentText, HiTerminal } from "react-icons/hi";
+import { HiFolder, HiDocumentText } from "react-icons/hi";
+import { FaFileCode } from "react-icons/fa";
 import { LAB_FS } from "../constants/index.js";
 import { PROJECT_STATUS } from "../constants/index.js";
 import { StatusBadge } from "../components/design/StatusBadge.jsx";
@@ -38,11 +39,23 @@ export default function LabPage() {
   return (
     <Section className="pt-[5rem] mt-[2.25rem]" crosses paddings>
       <div className="flex flex-col items-center min-h-screen bg-[#0b0f19] text-cyan-300 font-mono p-6 -mt-10 md:-mt-16 lg:-mt-24">
-        <h1 className="flex items-center justify-start mr-auto text-xl md:text-2xl md:px-10 mb-2 gap-2">
-          <HiTerminal /> LAB FILE_SYSTEM
+        <h1 className="flex items-center justify-start mr-auto text-xl md:text-2xl md:px-10 mb-4 gap-2">
+          <FaFileCode /> LAB_FILESYSTEM
         </h1>
+        {/* LAB TERMINAL HEADER */}
+        <div className="w-full mx-auto mb-4 md:mb-2 md:px-10">
+          <div className="font-mono text-sm bg-black/80 border border-cyan-500/30 p-4 text-green-400">
+            <p>
+              <span className="text-green-400">&gt;</span> lab.mount --fs
+            </p>
+            <p className="text-cyan-400/70 mt-1">
+              initializing filesystem interface
+              <span className="animate-pulse ml-1">▌</span>
+            </p>
+          </div>
+        </div>
 
-        <div className="grid md:grid-cols-2 gap-6 w-full md:p-10">
+        <div className="grid md:grid-cols-2 gap-6 w-full md:px-10">
           {/* filesystem */}
           <div className="border bg-black/80 border-cyan-500/30 rounded-sm p-4">
             <div className="mb-2 text-sm text-cyan-500">/{path.join("/")}</div>
@@ -71,12 +84,11 @@ export default function LabPage() {
                       className="flex items-center w-full text-left hover:text-green-400"
                     >
                       {/* levá část: ikona + název */}
-                      <div className="flex items-center mr-5 gap-2 w-32">
+                      <div className="flex items-center mr-2 gap-2 text-base w-48">
                         {/* w-32 = pevná šířka pro názvy */}
-                        <HiFolder />
-                        <span className="text-cyan-400">{item}</span>
+                        <HiFolder size={22} />
+                        <span className="text-cyan-400 hover:text-green-400">{item}</span>
                       </div>
-                      <div></div>
                       {/* badge */}
                       {status && <StatusBadge status={status} />}
                     </button>
@@ -85,7 +97,7 @@ export default function LabPage() {
                       onClick={() => handleCat(item)}
                       className="flex items-center gap-2 hover:text-purple-400 w-full text-left"
                     >
-                      <HiDocumentText /> {item}
+                      <HiDocumentText size={20} /> {item}
                     </button>
                   )}
                 </div>

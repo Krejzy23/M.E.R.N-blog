@@ -228,8 +228,8 @@ export const STATUS = {
 };
 
 export const PROJECT_STATUS = {
-  pwnagotchi: "ARCHIVED",
+  m5stack: "ARCHIVED",
   autodarts: "VIP",
-  pineApple: "ACTIVE",
+  pwnagotchi: "ACTIVE",
   "old-exploits": "ARCHIVED",
 };

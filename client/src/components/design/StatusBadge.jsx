@@ -5,7 +5,7 @@ export function StatusBadge({ status }) {
 
   return (
     <span
-      className={`text-xs px-2 py-0.5 border rounded font-mono tracking-widest
+      className={`text-xs px-1 py-0.5 border rounded-sm font-mono tracking-widest
         ${s.color} border-current shadow ${s.glow}`}
     >
       [{s.label}]
