@@ -35,28 +35,29 @@ export default function Hero() {
           SYSTEM STATUS: ONLINE
         </p>
 
-        <h1 className="text-3xl md:text-5xl font-bold text-cyan-300 mb-4">
+        <h1 className="text-3xl tracking-wider md:text-5xl font-bold text-cyan-300 mb-4">
           ALEŠ KREJZL
         </h1>
 
-        <p className="text-sm md:text-lg text-cyan-400 mb-6">
+        <p className="text-[13px] md:text-lg text-cyan-400 mb-6">
           Security Research • Hardware Hacking • Linux
         </p>
 
         {/* TERMINAL – PŘESNĚ TADY */}
-        <div className="text-left w-96 bg-black/40 border border-cyan-500/30 rounded-sm p-4 mb-8 transition-all duration-500">
+        <div className="text-left w-full max-w-xs md:max-w-md bg-black/80 border border-cyan-500/30 rounded-sm p-4 mb-8 transition-all text-xs md:text-sm duration-500">
           {!bootDone ? (
             <>
               {BOOT_LINES.slice(0, bootIndex).map((line, i) => (
-                <div key={i} className="text-green-400 text-sm">
+                <div key={i} className="text-green-400">
                   {line}
                 </div>
               ))}
               <span className="animate-pulse text-green-400">▌</span>
             </>
           ) : (
-            <div className="text-green-400 text-center text-sm">
-              user@AK-lab:~$_ <span className="animate-pulse">▌</span>
+            <div className="text-green-400 text-center text-xs md:text-sm">
+              user@AK-lab:~$ echo "Welcome back"
+              <span className="animate-pulse">▌</span>
             </div>
           )}
         </div>
@@ -67,22 +68,33 @@ export default function Hero() {
             bootDone ? "opacity-100" : "opacity-0"
           }`}
         >
-          <a
-            href="/search"
-            className="group relative flex items-center gap-2 px-4 py-2 md:px-6 md:py-2 border border-cyan-500/40 text-cyan-400 font-mono text-sm md:text-base hover:text-green-300 hover:border-green-400 transition overflow-hidden"
-          >
-            {/* glow */}
-            <span className="absolute inset-0 bg-green-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
-            <span className="relative z-10">&gt; view.logs</span>
-          </a>
-          <a
-            href="/about"
-            className="group relative flex items-center gap-2 px-4 py-2 md:px-6 md:py-2 border border-green-500/40 text-green-400 font-mono text-sm md:text-base hover:text-cyan-300 hover:border-cyan-400 transition overflow-hidden"
-          >
-            {/* glow */}
-            <span className="absolute inset-0 bg-cyan-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
-            <span className="relative z-10">&gt; open.channel</span>
-          </a>
+          {" "}
+          <div>
+            <a
+              href="/search"
+              className="group relative flex justify-center items-center gap-2 px-4 py-2 md:px-4 md:py-2 border border-cyan-500/40 text-cyan-400 font-mono  hover:text-green-300 hover:border-green-400 transition overflow-hidden"
+            >
+              {/* glow */}
+              <span className="absolute inset-0 bg-green-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
+              <span className="relative z-10 text-xs md:text-sm ">&gt; view.logs</span>
+            </a>
+            <p className="text-[10px] text-cyan-500/60 mt-1 font-mono text-center">
+              browse articles & writeups
+            </p>
+          </div>
+          <div>
+            <a
+              href="/about"
+              className="group relative flex justify-center items-center gap-2 px-4 py-2 md:px-6 md:py-2 border border-green-500/40 text-green-400 font-mono hover:text-cyan-300 hover:border-cyan-400 transition overflow-hidden"
+            >
+              {/* glow */}
+              <span className="absolute inset-0 bg-cyan-400/40 blur-lg opacity-0 group-hover:opacity-100 transition" />
+              <span className="relative z-10 text-xs md:text-sm ">&gt; open.channel</span>
+            </a>
+            <p className="text-[10px] text-cyan-500/60 mt-1 font-mono text-center">
+            explore projects & experiments
+            </p>
+          </div>
         </div>
       </div>
     </div>

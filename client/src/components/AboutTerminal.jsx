@@ -69,8 +69,8 @@ Tools: Git, Linux, Docker`,
   exploit: () => "No exploits found… yet.",
 
   neofetch: () => `
-     ()_/)
-     ( •_•)      KrejzyOS
+     (\\_/)
+     ( x_•)      KrejzyOS
     / >🛡 <       React | Security | Linux
     `,
 
